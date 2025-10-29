@@ -22,10 +22,7 @@ class WhatsAppDirectApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
         useMaterial3: true,
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          elevation: 2,
-        ),
+        appBarTheme: const AppBarTheme(centerTitle: true, elevation: 2),
       ),
       home: const HomeScreen(),
     );
@@ -44,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  
+
   String _countryCode = '+1';
   String _detectedCountryCode = 'US';
   bool _isLoading = false;
@@ -60,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final locale = ui.PlatformDispatcher.instance.locale;
       final countryCode = locale.countryCode;
-      
+
       if (countryCode != null && countryCode.isNotEmpty) {
         setState(() {
           _detectedCountryCode = countryCode;
@@ -122,7 +119,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _onContactSelected(String phoneNumber, String countryCode, String message) {
+  void _onContactSelected(
+    String phoneNumber,
+    String countryCode,
+    String message,
+  ) {
     setState(() {
       _selectedTabIndex = 0;
       _phoneController.text = phoneNumber;
@@ -147,7 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: _selectedTabIndex == 0 ? _buildSendMessageTab() : _buildRecentContactsTab(),
+      body: _selectedTabIndex == 0
+          ? _buildSendMessageTab()
+          : _buildRecentContactsTab(),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedTabIndex,
         onDestinationSelected: (index) {
@@ -160,10 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.message),
             label: 'Send Message',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.history),
-            label: 'Recent',
-          ),
+          NavigationDestination(icon: Icon(Icons.history), label: 'Recent'),
         ],
       ),
     );
@@ -193,9 +193,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 8),
                         Text(
                           'Phone Number',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -206,7 +205,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         labelText: 'Phone Number',
                         border: const OutlineInputBorder(),
                         hintText: 'Enter phone number',
-                        helperText: 'Country auto-detected: $_detectedCountryCode',
+                        helperText:
+                            'Country auto-detected: $_detectedCountryCode',
                         helperStyle: TextStyle(
                           color: Theme.of(context).primaryColor,
                           fontSize: 12,
@@ -249,9 +249,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 8),
                         Text(
                           'Message',
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -295,7 +294,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 16),
             Card(
-              color: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
+              color: Theme.of(
+                context,
+              ).colorScheme.primaryContainer.withOpacity(0.3),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
@@ -323,9 +324,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildRecentContactsTab() {
-    return RecentContactsWidget(
-      onContactSelected: _onContactSelected,
-    );
+    return RecentContactsWidget(onContactSelected: _onContactSelected);
   }
 
   void _showInfoDialog() {
@@ -350,10 +349,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text('3. Tap "Send via WhatsApp"'),
               Text('4. WhatsApp will open with the chat ready'),
               SizedBox(height: 16),
-              Text(
-                'Features:',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              Text('Features:', style: TextStyle(fontWeight: FontWeight.bold)),
               SizedBox(height: 8),
               Text('• International phone number support'),
               Text('• Recent contacts history'),
