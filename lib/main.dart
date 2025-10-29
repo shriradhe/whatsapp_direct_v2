@@ -348,6 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text('2. Type your message (optional)'),
               Text('3. Tap "Send via WhatsApp"'),
               Text('4. WhatsApp will open with the chat ready'),
+              Text('5. Thank you for using our app'),
               SizedBox(height: 16),
               Text('Features:', style: TextStyle(fontWeight: FontWeight.bold)),
               SizedBox(height: 8),
